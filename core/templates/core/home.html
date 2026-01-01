@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <title>Portfolio Django</title>
-</head>
-<body>
-    <h1>Moje portfolio</h1>
-    <p>Projekt Django działa poprawnie.</p>
-</body>
-</html>
+{% extends 'core/base.html' %}
+
+{% block title %}Strona Główna{% endblock %}
+
+{% block content %}
+<div class="text-center" data-aos="fade-up">
+    <h1 class="display-4">Witaj na moim portfolio!</h1>
+    <p class="lead">Projekt Django działa poprawnie i wygląda ładnie dzięki Bootstrap.</p>
+    <a href="#" class="btn btn-primary btn-lg mt-3">Zobacz moje projekty</a>
+</div>
+{% endblock %}
