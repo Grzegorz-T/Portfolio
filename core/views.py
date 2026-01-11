@@ -9,6 +9,11 @@ def home(request):
         "projects": projects
     })
 
+def projects(request):
+    projects = Project.objects.all()
+    return render(request, "core/projects.html", {
+        "projects": projects
+    })
 
 def dashboard(request):
     data = (

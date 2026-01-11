@@ -1,0 +1,56 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Portfolio{% endblock %}
+
+{% block content %}
+
+<div class="text-center mb-5" data-aos="fade-up">
+    <h1 class="display-4">Moje projekty</h1>
+    <p class="lead">Moje projekty</p>
+</div>
+
+<section class="timeline-container">
+    <div class="timeline">
+
+        {% for project in projects %}
+        <div class="timeline-item {% cycle 'left' 'right' %}"
+             data-aos="{% cycle 'fade-right' 'fade-left' %}">
+
+            <div class="content card shadow-sm h-100">
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ project.title }}</h5>
+                    <p class="card-text">
+                        {{ project.description|truncatewords:20 }}
+                    </p>
+                </div>
+
+                <div class="card-footer bg-transparent border-0">
+                    {% if project.github_url %}
+                    <a href="{{ project.github_url }}"
+                       class="btn btn-outline-dark btn-sm"
+                       target="_blank">
+                        <i class="bi bi-github"></i> GitHub
+                    </a>
+                    {% endif %}
+
+                    {% if project.live_url %}
+                    <a href="{{ project.live_url }}"
+                       class="btn btn-outline-primary btn-sm"
+                       target="_blank">
+                        Demo
+                    </a>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center text-muted">Brak projektów</p>
+        {% endfor %}
+
+    </div>
+</section>
+
+
+{% endblock %}
