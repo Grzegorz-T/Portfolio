@@ -10,11 +10,13 @@
 
     <h1 class="mb-3">Witam!</h1>
     <p class="lead">
-        O to moja strona
+        Oto moja strona
     </p>
 
 </div>
-
+<div class="divider">
+    <span></span>
+</div>
 <div class="home-menu">
     <a href="{% url 'projects' %}" class="menu-item projects">
         <span>Projekty</span>
@@ -24,9 +26,12 @@
         <span>O mnie</span>
     </a>
 
-    <a href="{% url 'projects' %}" class="menu-item about">
+    <a href="{% url 'dashboard' %}" class="menu-item about">
         <span>Dashboard</span>
     </a>
-</div>
 
+</div>
+<div class="divider">
+    <span></span>
+</div>
 {% endblock %}

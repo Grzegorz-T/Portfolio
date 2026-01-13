@@ -6,7 +6,7 @@
 }
 
 [data-theme="dark"] {
-    --bg-gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    --bg-gradient: linear-gradient(135deg, #202020, #232323, #2d2d2d);
     --text-color: #f1f1f1;
     --card-bg: #1e1e1e;
     --navbar-bg: #000000;
