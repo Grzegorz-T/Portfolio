@@ -1,0 +1,16 @@
+
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="about-section">
+<div class="about-card">
+<img src="{% static 'img/me.jpg' %}" alt="Moje zdjęcie" class="about-photo"><h1>Jan Kowalski</h1>
+<p>
+Jestem programistą Python/Django.
+Tworzę nowoczesne strony internetowe, skupiając się na estetyce,
+animacjach oraz czystym kodzie.
+</p>
+</div>
+</section>
+{% endblock %}

@@ -15,6 +15,10 @@ def projects(request):
         "projects": projects
     })
 
+def about(request):
+    return render(request, 'core/about.html')
+
+
 def dashboard(request):
     data = (
         Project.objects

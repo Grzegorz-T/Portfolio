@@ -29,7 +29,6 @@ body {
 }
 /* NAVBAR */
 #main-navbar {
-    height: 80px;
     transform: translateY(-100%);
     transition: transform 0.4s ease;
 }
@@ -44,7 +43,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: -60px;
+    margin-top: -50px;
     cursor: pointer;
 }
 
@@ -136,9 +135,44 @@ body.nav-open #page-wrapper {
     }
 }
 
+.about-section {
+min-height: 60vh;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+
+.about-card {
+text-align: center;
+max-width: 400px;
+}
+
+
+.about-photo {
+width: 180px;
+height: 180px;
+object-fit: cover;
+border-radius: 50%;
+border: 4px solid #ddd;
+margin-bottom: 20px;
+}
+
+
+.about-card h1 {
+margin-bottom: 10px;
+}
+
+
+.about-card p {
+color: #555;
+line-height: 1.6;
+}
+
 #projectsChart {
     width: 100% !important;
     height: 300px !important;
 }
+
 
 

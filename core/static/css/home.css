@@ -33,10 +33,10 @@ html, body {
     background: url('../img/code.jpg') center/cover no-repeat;
 }
 .menu-item.dashboard {
-    background: url('../img/tom.jpg') center/cover no-repeat;
+    background: url('../img/charts.jpg') center/cover no-repeat;
 }
 .menu-item.about {
-    background: url('../img/charts.jpg') center/cover no-repeat;
+    background: url('../img/tom.jpg') center/cover no-repeat;
 }
 
 .menu-item:not(:last-child) {
