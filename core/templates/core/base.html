@@ -67,5 +67,65 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+<script>
+const slider = document.querySelector('.wallpaper-slider');
+
+let isDown = false;
+let hasMoved = false;
+let startX = 0;
+let scrollStart = 0;
+let currentX = 0;
+let rafId = null;
+
+// start drag
+slider.addEventListener('pointerdown', (e) => {
+    e.preventDefault(); // blokuje native drag
+    isDown = true;
+    hasMoved = false;
+    startX = e.clientX;
+    scrollStart = slider.scrollLeft;
+
+    slider.setPointerCapture(e.pointerId); // łapiemy wszystkie zdarzenia pointer
+});
+
+// move
+slider.addEventListener('pointermove', (e) => {
+    if (!isDown) return;
+
+    const dx = e.clientX - startX;
+
+    if (!hasMoved && Math.abs(dx) > 5) {
+        hasMoved = true;
+        slider.classList.add('dragging');
+    }
+
+    if (!hasMoved) return;
+
+    currentX = e.clientX;
+
+    if (!rafId) {
+        rafId = requestAnimationFrame(updateScroll);
+    }
+});
+
+// end drag
+slider.addEventListener('pointerup', (e) => {
+    isDown = false;
+    hasMoved = false;
+    slider.releasePointerCapture(e.pointerId);
+});
+
+// scroll update
+function updateScroll() {
+    const walk = (currentX - startX) * 1.2;
+    slider.scrollLeft = scrollStart - walk;
+    rafId = null;
+}
+</script>
+
+
+
+
+
 </body>
 </html>

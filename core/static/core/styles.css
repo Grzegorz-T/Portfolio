@@ -174,5 +174,129 @@ line-height: 1.6;
     height: 300px !important;
 }
 
+.wallpaper-preview {
+    margin: 40px 0;
+}
+.wallpapers-section {
+    padding: 40px 20px;
+}
+
+.wallpapers-section h1 {
+    text-align: center;
+    margin-bottom: 60px;
+    font-size: 2.2rem;
+    color: #333;
+}
+
+.wallpapers-section {
+    padding: 40px 20px;
+}
+
+.wallpapers-section h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.2rem;
+    color: #333;
+}
+
+.wallpaper-grid {
+    position: relative; /* potrzebne do Masonry */
+    width: 100%;
+}
+
+/* wszystkie obrazki ustawione absolutnie w Masonry */
+.wallpaper-grid img {
+    position: absolute;
+    width: 200px; /* domyślna szerokość kolumny */
+    border-radius: 12px;
+    object-fit: cover;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.wallpaper-grid img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.wallpapers-section {
+    padding: 40px 20px;
+    margin-right: -20px;
+}
+
+.wallpapers-section h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.2rem;
+    color: #333;
+}
+
+
+.wallpaper-slider {
+    margin-left: 100px;
+    margin-right: 100px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    padding: 10px 0;
+
+    /* snap działa tylko gdy NIE dragujemy */
+    scroll-snap-type: x mandatory;
+
+    cursor: grab;
+    user-select: none;
+    -webkit-user-drag: none;
+
+    will-change: scroll-position;
+    -webkit-overflow-scrolling: touch;
+}
+
+.wallpaper-slider.dragging {
+    cursor: grabbing;
+    scroll-snap-type: none; /* 🔥 KLUCZ – zero walki ze snapem */
+}
+
+.wallpaper-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.wallpaper-slider a {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+}
+
+/* MASKA ZANIKANIA – OK, zostaje */
+.fade-mask {
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 15%,
+        black 85%,
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 15%,
+        black 85%,
+        transparent 100%
+    );
+}
+
+/* OBRAZY */
+.wallpaper-slider img {
+    height: 680px;
+    border-radius: 8px;
+    margin: 20px;
+    user-select: none;
+    -webkit-user-drag: none;
+
+    pointer-events: none; /* 🔥 zapobiega klik/drag obrazka */
+}
+
+
+
+
+
 
 

@@ -18,7 +18,6 @@ def projects(request):
 def about(request):
     return render(request, 'core/about.html')
 
-
 def dashboard(request):
     data = (
         Project.objects
@@ -35,3 +34,6 @@ def dashboard(request):
         "labels": labels,
         "counts": counts
     })
+
+def wallpapers(request):
+    return render(request, "core/wallpapers.html")

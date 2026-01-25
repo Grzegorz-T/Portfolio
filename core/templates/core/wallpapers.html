@@ -1,0 +1,87 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="wallpapers-section">
+    <h1>Galeria tapet</h1>
+
+    <div class="wallpaper-grid">
+        <img src="{% static 'img/wallpapers/wallpaper1.jpg' %}" alt="">
+        <img src="{% static 'img/wallpapers/wallpaper2.jpg' %}" alt="">
+        <img src="{% static 'img/wallpapers/wallpaper3.jpg' %}" alt="">
+        <img src="{% static 'img/wallpapers/wallpaper4.jpg' %}" alt="">
+        <img src="{% static 'img/wallpapers/wallpaper5.jpg' %}" alt="">
+        <img src="{% static 'img/wallpapers/wallpaper6.jpg' %}" alt="">
+        <img src="{% static 'img/wallpapers/wallpaper7.jpg' %}" alt="">
+        <img src="{% static 'img/wallpapers/wallpaper8.jpg' %}" alt="">
+        <img src="{% static 'img/wallpapers/wallpaper9.jpg' %}" alt="">
+        <img src="{% static 'img/wallpapers/wallpaper10.jpg' %}" alt="">
+        <img src="{% static 'img/wallpapers/wallpaper11.jpg' %}" alt="">
+        <img src="{% static 'img/wallpapers/wallpaper1.jpg' %}" alt="">
+        <img src="{% static 'img/wallpapers/wallpaper4.jpg' %}" alt="">
+        <img src="{% static 'img/wallpapers/wallpaper1.jpg' %}" alt="">
+        <!-- kolejne zdjęcia -->
+    </div>
+</section>
+<script>
+window.addEventListener('load', () => {
+    const grid = document.querySelector('.wallpaper-grid');
+    const images = Array.from(grid.querySelectorAll('img'));
+
+    function layoutMasonry() {
+        const gridWidth = grid.clientWidth;
+        const colWidth = 200; // szerokość jednej kolumny
+        const gap = 16;       // odstęp między obrazkami
+        const cols = Math.floor(gridWidth / (colWidth + gap));
+        const colHeights = Array(cols).fill(0); // wysokość każdej kolumny
+
+        images.forEach(img => {
+            const ratio = img.naturalWidth / img.naturalHeight;
+            let imgCols = 1;
+
+            // szerokie → 2 kolumny
+            if (ratio > 1.5 && cols > 1) imgCols = 2;
+
+            // szerokość obrazka
+            const width = imgCols * colWidth + (imgCols - 1) * gap;
+            const height = width / ratio;
+
+            // znajdź najlepszą kolumnę do wstawienia
+            let minCol = 0;
+            let minHeight = Infinity;
+
+            for (let i = 0; i <= cols - imgCols; i++) {
+                const maxColHeight = Math.max(...colHeights.slice(i, i + imgCols));
+                if (maxColHeight < minHeight) {
+                    minHeight = maxColHeight;
+                    minCol = i;
+                }
+            }
+
+            // ustaw pozycję obrazka
+            img.style.width = width + 'px';
+            img.style.top = minHeight + 'px';
+            img.style.left = (minCol * (colWidth + gap)) + 'px';
+
+            // zaktualizuj wysokości kolumn
+            const newHeight = minHeight + height + gap;
+            for (let i = minCol; i < minCol + imgCols; i++) {
+                colHeights[i] = newHeight;
+            }
+        });
+
+        // ustaw wysokość kontenera, żeby obejmował wszystkie obrazki
+        grid.style.height = Math.max(...colHeights) + 'px';
+    }
+
+    // uruchom układ Masonry
+    layoutMasonry();
+
+    // aktualizacja przy resize
+    window.addEventListener('resize', layoutMasonry);
+});
+
+</script>
+
+
+{% endblock %}
