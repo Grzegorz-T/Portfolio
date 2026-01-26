@@ -1,22 +1,42 @@
 :root {
-    --bg-gradient: linear-gradient(135deg, #ddecff, #99ceff);
-    --text-color: #212529;
+    --text-color: #ffffff;
     --card-bg: #ffffff;
-    --navbar-bg: #212529;
+    --navbar-bg: #324455;
 }
 
 [data-theme="dark"] {
     --bg-gradient: linear-gradient(135deg, #202020, #232323, #2d2d2d);
     --text-color: #f1f1f1;
     --card-bg: #1e1e1e;
-    --navbar-bg: #000000;
+    --navbar-bg: #101010;
 }
 
 body {
-    background: var(--bg-gradient);
-    color: var(--text-color);
+    margin: 0;
     min-height: 100vh;
-    transition: background 0.4s ease, color 0.3s ease;
+    color: var(--text-color);
+    background-image: url("../img/background3.png");
+    background-size: cover;        /* wypełnia cały ekran */
+    background-position: center;   /* centruje */
+    background-repeat: no-repeat;
+    background-attachment: fixed;  /* efekt tapety */
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background: 
+        linear-gradient(
+            rgba(0,0,0,0.75),
+            rgba(0,0,0,0.75)
+        ),
+        url("../img/background3.png");
+
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
 }
 
 .card {
@@ -185,18 +205,11 @@ line-height: 1.6;
     text-align: center;
     margin-bottom: 60px;
     font-size: 2.2rem;
-    color: #333;
+    color: #ffffff;
 }
 
 .wallpapers-section {
     padding: 40px 20px;
-}
-
-.wallpapers-section h1 {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 2.2rem;
-    color: #333;
 }
 
 .wallpaper-grid {
@@ -228,7 +241,7 @@ line-height: 1.6;
     text-align: center;
     margin-bottom: 40px;
     font-size: 2.2rem;
-    color: #333;
+    color: #ffffff;
 }
 
 

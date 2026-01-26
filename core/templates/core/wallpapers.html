@@ -6,21 +6,15 @@
     <h1>Galeria tapet</h1>
 
     <div class="wallpaper-grid">
-        <img src="{% static 'img/wallpapers/wallpaper1.jpg' %}" alt="">
-        <img src="{% static 'img/wallpapers/wallpaper2.jpg' %}" alt="">
-        <img src="{% static 'img/wallpapers/wallpaper3.jpg' %}" alt="">
-        <img src="{% static 'img/wallpapers/wallpaper4.jpg' %}" alt="">
-        <img src="{% static 'img/wallpapers/wallpaper5.jpg' %}" alt="">
-        <img src="{% static 'img/wallpapers/wallpaper6.jpg' %}" alt="">
-        <img src="{% static 'img/wallpapers/wallpaper7.jpg' %}" alt="">
-        <img src="{% static 'img/wallpapers/wallpaper8.jpg' %}" alt="">
-        <img src="{% static 'img/wallpapers/wallpaper9.jpg' %}" alt="">
-        <img src="{% static 'img/wallpapers/wallpaper10.jpg' %}" alt="">
-        <img src="{% static 'img/wallpapers/wallpaper11.jpg' %}" alt="">
-        <img src="{% static 'img/wallpapers/wallpaper1.jpg' %}" alt="">
-        <img src="{% static 'img/wallpapers/wallpaper4.jpg' %}" alt="">
-        <img src="{% static 'img/wallpapers/wallpaper1.jpg' %}" alt="">
-        <!-- kolejne zdjęcia -->
+        {% if wallpapers %}
+        {% for img in wallpapers %}
+            <img src="{% static 'img/wallpapers/'|add:img %}"
+                 alt=""
+                 loading="lazy">
+        {% endfor %}
+    {% else %}
+        <p>Brak tapet 😢</p>
+    {% endif %}
     </div>
 </section>
 <script>

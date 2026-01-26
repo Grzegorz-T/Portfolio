@@ -1,7 +1,9 @@
+import os
 from django.shortcuts import render
 from .models import Project
 from django.db.models.functions import TruncMonth
 from django.db.models import Count
+from django.apps import apps
 
 def home(request):
     projects = Project.objects.all().order_by('-created_at')
@@ -36,4 +38,22 @@ def dashboard(request):
     })
 
 def wallpapers(request):
-    return render(request, "core/wallpapers.html")
+    core_app = apps.get_app_config("core")
+    wallpapers_dir = os.path.join(
+        core_app.path,
+        "static",
+        "img",
+        "wallpapers"
+    )
+
+    wallpapers = []
+
+    if os.path.exists(wallpapers_dir):
+        wallpapers = sorted(
+            f for f in os.listdir(wallpapers_dir)
+            if f.lower().endswith((".jpg", ".png", ".webp"))
+        )
+
+    return render(request, "core/wallpapers.html", {
+        "wallpapers": wallpapers
+    })
