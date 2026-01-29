@@ -36,7 +36,7 @@ html, body {
     background: url('../img/charts.jpg') center/cover no-repeat;
 }
 .menu-item.about {
-    background: url('../img/tom.jpg') center/cover no-repeat;
+    background: url('../img/gg.jpg') center/cover no-repeat;
 }
 
 .menu-item:not(:last-child) {

@@ -5,3 +5,4 @@ __pycache__/
 db.sqlite3
 commands.txt
 Portfolio/core/static/img/wallpapers/
+/core/static/img/wallpapers/

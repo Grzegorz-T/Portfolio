@@ -66,8 +66,52 @@
             });
         });
     </script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const navToggle = document.getElementById("nav-toggle");
+    const navbar = document.getElementById("main-navbar");
+    const body = document.body;
 
+    if (!navToggle || !navbar) return;
 
+    let isOpen = false;
+
+    function openNavbar() {
+        body.classList.add("nav-open");
+        navToggle.classList.add("hidden");
+        isOpen = true;
+    }
+
+    function closeNavbar() {
+        body.classList.remove("nav-open");
+        navToggle.classList.remove("hidden");
+        isOpen = false;
+    }
+
+    // 🍔 klik hamburgera
+    navToggle.addEventListener("click", openNavbar);
+
+    // 🔗 klik linku
+    document.querySelectorAll("#main-navbar a").forEach(link => {
+        link.addEventListener("click", closeNavbar);
+    });
+
+    // 🖱️ AUTO-ZAMYKANIE PRZY SCROLLU
+    let lastScroll = window.scrollY;
+
+    window.addEventListener("scroll", () => {
+        if (!isOpen) return;
+
+        const currentScroll = window.scrollY;
+
+        if (Math.abs(currentScroll - lastScroll) > 10) {
+            closeNavbar();
+        }
+
+        lastScroll = currentScroll;
+    });
+});
+</script>
 
 
 

@@ -1,41 +1,37 @@
 :root {
-    --text-color: #ffffff;
+    --text-color: #f1f1f1;
     --card-bg: #ffffff;
     --navbar-bg: #324455;
+    --bg-image: url("../img/background.png");
 }
 
 [data-theme="dark"] {
-    --bg-gradient: linear-gradient(135deg, #202020, #232323, #2d2d2d);
     --text-color: #f1f1f1;
     --card-bg: #1e1e1e;
     --navbar-bg: #101010;
+    --bg-image: url("../img/background_dark.jpg");
 }
 
 body {
     margin: 0;
     min-height: 100vh;
     color: var(--text-color);
-    background-image: url("../img/background3.png");
-    background-size: cover;        /* wypełnia cały ekran */
-    background-position: center;   /* centruje */
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;  /* efekt tapety */
+    background-attachment: fixed;
 }
 
 body::before {
     content: "";
     position: fixed;
     inset: 0;
-
     background: 
-        linear-gradient(
-            rgba(0,0,0,0.75),
-            rgba(0,0,0,0.75)
-        ),
-        url("../img/background3.png");
-
+        linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)),
+        var(--bg-image);
     background-size: cover;
-    background-position: center;
+    background-position: top;
     z-index: -1;
 }
 
@@ -47,6 +43,7 @@ body::before {
 .navbar {
     background-color: var(--navbar-bg) !important;
 }
+
 /* NAVBAR */
 #main-navbar {
     transform: translateY(-100%);
@@ -58,25 +55,6 @@ body::before {
     transition: margin-top 0.4s ease;
 }
 
-/* PRZYCISK */
-.nav-toggle {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: -50px;
-    cursor: pointer;
-}
-
-.nav-toggle span {
-    display: block;
-    height: 3px;
-    background: var(--text-color);
-    margin: 3px auto;
-}
-
-.nav-toggle span:nth-child(1) { width: 30px; }
-.nav-toggle span:nth-child(2) { width: 20px; }
-.nav-toggle span:nth-child(3) { width: 10px; }
 
 /* STAN OTWARTY */
 body.nav-open #main-navbar {
@@ -84,8 +62,36 @@ body.nav-open #main-navbar {
 }
 
 body.nav-open #page-wrapper {
-    margin-top: 80px;
+    margin-top: 60px;
 }
+
+/* PRZYCISK */
+.nav-toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -50px;
+    cursor: pointer;
+    transition: opacity .3s ease, transform .3s ease;
+}
+
+.nav-toggle span {
+    display: block;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--text-color);
+    margin: 3px auto;
+}
+
+.nav-toggle.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.85);
+}
+
+.nav-toggle span:nth-child(1) { width: 30px; opacity: 0.4;}
+.nav-toggle span:nth-child(2) { width: 20px; opacity: 0.3;}
+.nav-toggle span:nth-child(3) { width: 10px; opacity: 0.2;}
 
 .timeline-container {
     display: flex;
@@ -190,26 +196,22 @@ line-height: 1.6;
 }
 
 #projectsChart {
-    width: 100% !important;
+    width: 60% !important;
     height: 300px !important;
 }
 
-.wallpaper-preview {
-    margin: 40px 0;
-}
-.wallpapers-section {
+
+.wallpapers-section div{
     padding: 40px 20px;
+    margin-left: 20px;
 }
 
 .wallpapers-section h1 {
     text-align: center;
     margin-bottom: 60px;
+    padding: 40px;
     font-size: 2.2rem;
     color: #ffffff;
-}
-
-.wallpapers-section {
-    padding: 40px 20px;
 }
 
 .wallpaper-grid {
@@ -220,7 +222,6 @@ line-height: 1.6;
 /* wszystkie obrazki ustawione absolutnie w Masonry */
 .wallpaper-grid img {
     position: absolute;
-    width: 200px; /* domyślna szerokość kolumny */
     border-radius: 12px;
     object-fit: cover;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -232,22 +233,13 @@ line-height: 1.6;
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
-.wallpapers-section {
-    padding: 40px 20px;
-    margin-right: -20px;
+.wallpaper-preview {
+    margin: 40px 0;
 }
-
-.wallpapers-section h1 {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 2.2rem;
-    color: #ffffff;
-}
-
 
 .wallpaper-slider {
-    margin-left: 100px;
-    margin-right: 100px;
+    margin-left: 100px auto;
+    margin-right: 100px auto;
     display: flex;
     gap: 0;
     overflow-x: auto;
@@ -298,7 +290,7 @@ line-height: 1.6;
 
 /* OBRAZY */
 .wallpaper-slider img {
-    height: 680px;
+    height: 600px;
     border-radius: 8px;
     margin: 20px;
     user-select: none;
