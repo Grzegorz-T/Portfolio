@@ -54,7 +54,7 @@ html, body {
 }
 
 .menu-item:nth-child(3) {
-    z-index: 1;
+    clip-path: polygon(18% 0, 100% 0, 82% 100%, 0 100%);
 }
 
 /* CIEMNA WARSTWA */

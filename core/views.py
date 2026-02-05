@@ -57,3 +57,6 @@ def wallpapers(request):
     return render(request, "core/wallpapers.html", {
         "wallpapers": wallpapers
     })
+
+def contact(request):
+    return render(request, "core/contact.html")
