@@ -24,54 +24,48 @@ window.addEventListener('load', () => {
 
     function layoutMasonry() {
         const gridWidth = grid.clientWidth;
-        const colWidth = 200; // szerokość jednej kolumny
-        const gap = 16;       // odstęp między obrazkami
-        const cols = Math.floor(gridWidth / (colWidth + gap));
-        const colHeights = Array(cols).fill(0); // wysokość każdej kolumny
+        const colWidth = 200;
+        const gap = 16;
+
+        const cols = Math.max(1, Math.floor((gridWidth + gap) / (colWidth + gap)));
+        const colHeights = Array(cols).fill(0);
+
+        // 🔥 WYŚRODKOWANIE
+        const usedWidth = cols * colWidth + (cols - 1) * gap;
+        const offsetX = Math.max(0, (gridWidth - usedWidth) / 2);
 
         images.forEach(img => {
             const ratio = img.naturalWidth / img.naturalHeight;
-            let imgCols = 1;
+            let imgCols = (ratio > 1.5 && cols > 1) ? 2 : 1;
 
-            // szerokie → 2 kolumny
-            if (ratio > 1.5 && cols > 1) imgCols = 2;
-
-            // szerokość obrazka
             const width = imgCols * colWidth + (imgCols - 1) * gap;
             const height = width / ratio;
 
-            // znajdź najlepszą kolumnę do wstawienia
             let minCol = 0;
             let minHeight = Infinity;
 
             for (let i = 0; i <= cols - imgCols; i++) {
-                const maxColHeight = Math.max(...colHeights.slice(i, i + imgCols));
-                if (maxColHeight < minHeight) {
-                    minHeight = maxColHeight;
+                const h = Math.max(...colHeights.slice(i, i + imgCols));
+                if (h < minHeight) {
+                    minHeight = h;
                     minCol = i;
                 }
             }
 
-            // ustaw pozycję obrazka
             img.style.width = width + 'px';
             img.style.top = minHeight + 'px';
-            img.style.left = (minCol * (colWidth + gap)) + 'px';
+            img.style.left = offsetX + minCol * (colWidth + gap) + 'px';
 
-            // zaktualizuj wysokości kolumn
             const newHeight = minHeight + height + gap;
             for (let i = minCol; i < minCol + imgCols; i++) {
                 colHeights[i] = newHeight;
             }
         });
 
-        // ustaw wysokość kontenera, żeby obejmował wszystkie obrazki
         grid.style.height = Math.max(...colHeights) + 'px';
     }
 
-    // uruchom układ Masonry
     layoutMasonry();
-
-    // aktualizacja przy resize
     window.addEventListener('resize', layoutMasonry);
 });
 

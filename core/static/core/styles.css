@@ -1,8 +1,12 @@
 :root {
-    --text-color: #f1f1f1;
+    --text-color: #000000;
     --card-bg: #ffffff;
     --navbar-bg: #324455;
     --bg-image: url("../img/background.png");
+    --bg-overlay: linear-gradient(
+        rgba(100,100,100,0.5),
+        rgba(100,100,100,0.5)
+    );
 }
 
 [data-theme="dark"] {
@@ -10,6 +14,11 @@
     --card-bg: #1e1e1e;
     --navbar-bg: #101010;
     --bg-image: url("../img/background_dark.jpg");
+    --bg-overlay: linear-gradient(
+        rgba(0,0,0,0.05),
+        rgba(0,0,0,0.05)
+    );
+
 }
 
 body {
@@ -28,7 +37,7 @@ body::before {
     position: fixed;
     inset: 0;
     background: 
-        linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)),
+        var(--bg-overlay),
         var(--bg-image);
     background-size: cover;
     background-position: top;
@@ -201,10 +210,6 @@ line-height: 1.6;
 }
 
 
-.wallpapers-section div{
-    padding: 40px 20px;
-    margin-left: 20px;
-}
 
 .wallpapers-section h1 {
     text-align: center;
