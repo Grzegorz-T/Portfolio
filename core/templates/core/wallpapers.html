@@ -8,7 +8,7 @@
     <div class="wallpaper-grid">
         {% if wallpapers %}
         {% for img in wallpapers %}
-            <img src="{% static 'img/wallpapers/'|add:img %}"
+            <img src="{% static 'img/wallpapers/low/'|add:img %}"
                  alt=""
                  loading="lazy">
         {% endfor %}
@@ -17,26 +17,27 @@
     {% endif %}
     </div>
 </section>
-<script>
+<script> //rozmieszczenie obrazów na gridzie
 window.addEventListener('load', () => {
     const grid = document.querySelector('.wallpaper-grid');
     const images = Array.from(grid.querySelectorAll('img'));
 
     function layoutMasonry() {
         const gridWidth = grid.clientWidth;
-        const colWidth = 200;
+        const colWidth = 150;
         const gap = 16;
 
         const cols = Math.max(1, Math.floor((gridWidth + gap) / (colWidth + gap)));
         const colHeights = Array(cols).fill(0);
 
-        // 🔥 WYŚRODKOWANIE
         const usedWidth = cols * colWidth + (cols - 1) * gap;
         const offsetX = Math.max(0, (gridWidth - usedWidth) / 2);
 
         images.forEach(img => {
+            if (!img.complete || !img.naturalWidth) return; // 🔥 KLUCZ
+
             const ratio = img.naturalWidth / img.naturalHeight;
-            let imgCols = (ratio > 1.5 && cols > 1) ? 2 : 1;
+            const imgCols = (ratio > 1.5 && cols > 1) ? 2 : 1;
 
             const width = imgCols * colWidth + (imgCols - 1) * gap;
             const height = width / ratio;
@@ -53,8 +54,8 @@ window.addEventListener('load', () => {
             }
 
             img.style.width = width + 'px';
-            img.style.top = minHeight + 'px';
             img.style.left = offsetX + minCol * (colWidth + gap) + 'px';
+            img.style.top = minHeight + 'px';
 
             const newHeight = minHeight + height + gap;
             for (let i = minCol; i < minCol + imgCols; i++) {
@@ -65,11 +66,48 @@ window.addEventListener('load', () => {
         grid.style.height = Math.max(...colHeights) + 'px';
     }
 
+    // przelicz po załadowaniu KAŻDEGO obrazka
+    images.forEach(img => {
+        if (!img.complete) {
+            img.addEventListener('load', layoutMasonry);
+        }
+    });
+
     layoutMasonry();
     window.addEventListener('resize', layoutMasonry);
 });
 
 </script>
 
+<script>
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { rootMargin: '150px' });
 
+    document.querySelectorAll('.wallpaper-grid img').forEach(img => {
+        observer.observe(img);
+    });
+</script>
+
+<script>
+    document.querySelectorAll('.wallpaper-grid img').forEach(img => {
+        img.addEventListener('click', () => {
+            const overlay = document.createElement('div');
+            overlay.className = 'img-overlay';
+
+            const full = document.createElement('img');
+            full.src = img.dataset.full || img.src;
+
+            overlay.appendChild(full);
+            document.body.appendChild(overlay);
+
+            overlay.addEventListener('click', () => overlay.remove());
+        });
+    });
+</script>
 {% endblock %}

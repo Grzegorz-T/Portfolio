@@ -43,7 +43,7 @@ def wallpapers(request):
         core_app.path,
         "static",
         "img",
-        "wallpapers"
+        "wallpapers/low"
     )
 
     wallpapers = []

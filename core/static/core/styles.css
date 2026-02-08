@@ -26,7 +26,7 @@ body {
     min-height: 100vh;
     color: var(--text-color);
     background-image: var(--bg-image);
-    background-size: cover;
+    background-size: 120%;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -39,7 +39,7 @@ body::before {
     background: 
         var(--bg-overlay),
         var(--bg-image);
-    background-size: cover;
+    background-size: 120%;
     background-position: top;
     z-index: -1;
 }
@@ -209,8 +209,6 @@ line-height: 1.6;
     height: 300px !important;
 }
 
-
-
 .wallpapers-section h1 {
     text-align: center;
     margin-bottom: 60px;
@@ -226,16 +224,39 @@ line-height: 1.6;
 
 /* wszystkie obrazki ustawione absolutnie w Masonry */
 .wallpaper-grid img {
+    opacity: 0;
     position: absolute;
     border-radius: 12px;
     object-fit: cover;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform: translateY(20px) scale(0.96);
+    transition: opacity 0.6s ease, transform 0.6s ease;
     cursor: pointer;
+}
+
+.wallpaper-grid img.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
 }
 
 .wallpaper-grid img:hover {
     transform: scale(1.05);
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.img-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.img-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 12px;
 }
 
 .wallpaper-preview {
