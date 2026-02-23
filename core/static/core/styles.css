@@ -1,7 +1,7 @@
 :root {
     --text-color: #000000;
     --card-bg: #ffffff;
-    --navbar-bg: #324455;
+    --navbar-bg: #769bbd;
     --bg-image: url("../img/background.png");
     --bg-overlay: linear-gradient(
         rgba(100,100,100,0.5),
@@ -13,10 +13,10 @@
     --text-color: #f1f1f1;
     --card-bg: #1e1e1e;
     --navbar-bg: #101010;
-    --bg-image: url("../img/background_dark.jpg");
+    --bg-image: url("../img/background_dark.png");
     --bg-overlay: linear-gradient(
-        rgba(0,0,0,0.05),
-        rgba(0,0,0,0.05)
+        rgba(0,0,0,0.35),
+        rgba(0,0,0,0.35)
     );
 
 }
@@ -26,8 +26,8 @@ body {
     min-height: 100vh;
     color: var(--text-color);
     background-image: var(--bg-image);
-    background-size: 120%;
-    background-position: center;
+    background-size: 140%;
+    background-position: top;
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
@@ -39,7 +39,7 @@ body::before {
     background: 
         var(--bg-overlay),
         var(--bg-image);
-    background-size: 120%;
+    background-size: 140%;
     background-position: top;
     z-index: -1;
 }
@@ -52,55 +52,29 @@ body::before {
 .navbar {
     background-color: var(--navbar-bg) !important;
 }
-
-/* NAVBAR */
 #main-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     transform: translateY(-100%);
-    transition: transform 0.4s ease;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    z-index: 1000;
+    background-color: var(--navbar-bg);
 }
 
-/* WRAPPER */
+body.nav-open #main-navbar {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
 #page-wrapper {
     transition: margin-top 0.4s ease;
 }
 
-
-/* STAN OTWARTY */
-body.nav-open #main-navbar {
-    transform: translateY(0);
-}
-
 body.nav-open #page-wrapper {
-    margin-top: 60px;
+    margin-top: 90px; /* dopasuj wysokość do navbaru */
 }
-
-/* PRZYCISK */
-.nav-toggle {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: -50px;
-    cursor: pointer;
-    transition: opacity .3s ease, transform .3s ease;
-}
-
-.nav-toggle span {
-    display: block;
-    height: 3px;
-    border-radius: 999px;
-    background: var(--text-color);
-    margin: 3px auto;
-}
-
-.nav-toggle.hidden {
-    opacity: 0;
-    pointer-events: none;
-    transform: scale(0.85);
-}
-
-.nav-toggle span:nth-child(1) { width: 30px; opacity: 0.4;}
-.nav-toggle span:nth-child(2) { width: 20px; opacity: 0.3;}
-.nav-toggle span:nth-child(3) { width: 10px; opacity: 0.2;}
 
 .timeline-container {
     display: flex;

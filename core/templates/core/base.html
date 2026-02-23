@@ -41,11 +41,7 @@
 
     <!-- Główna treść -->
     <div id="page-wrapper">
-      <div id="nav-toggle" class="nav-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
+
     {% block content %}{% endblock %}
     </div>
     <!-- Bootstrap JS + Popper -->
@@ -57,63 +53,55 @@
     </script>
     {% block extra_js %}{% endblock %}
     <script src="{% static 'core/theme.js' %}"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const toggle = document.getElementById("nav-toggle");
+<!-- Twój istniejący JS i bootstrap/AOS tutaj -->
 
-            toggle.addEventListener("click", () => {
-                document.body.classList.toggle("nav-open");
-            });
-        });
-    </script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    const navToggle = document.getElementById("nav-toggle");
-    const navbar = document.getElementById("main-navbar");
     const body = document.body;
+    let navbarVisible = false;
 
-    if (!navToggle || !navbar) return;
-
-    let isOpen = false;
-
-    function openNavbar() {
+    function showNavbar() {
         body.classList.add("nav-open");
-        navToggle.classList.add("hidden");
-        isOpen = true;
+        navbarVisible = true;
     }
 
-    function closeNavbar() {
+    function hideNavbar() {
         body.classList.remove("nav-open");
-        navToggle.classList.remove("hidden");
-        isOpen = false;
+        navbarVisible = false;
     }
 
-    // 🍔 klik hamburgera
-    navToggle.addEventListener("click", openNavbar);
-
-    // 🔗 klik linku
-    document.querySelectorAll("#main-navbar a").forEach(link => {
-        link.addEventListener("click", closeNavbar);
+    // Ukryj przy scrollu w dół
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 5 && navbarVisible) {
+            hideNavbar();
+        }
     });
 
-    // 🖱️ AUTO-ZAMYKANIE PRZY SCROLLU
-    let lastScroll = window.scrollY;
+    // 🔥 Wykrywanie próby scrolla w górę NA SAMEJ GÓRZE
+    window.addEventListener("wheel", (e) => {
+        if (window.scrollY <= 1 && e.deltaY < 0 && !navbarVisible) {
+            showNavbar();
+        }
+    });
 
-    window.addEventListener("scroll", () => {
-        if (!isOpen) return;
+    // Obsługa telefonu
+    let touchStartY = 0;
 
-        const currentScroll = window.scrollY;
+    window.addEventListener("touchstart", (e) => {
+        touchStartY = e.touches[0].clientY;
+    });
 
-        if (Math.abs(currentScroll - lastScroll) > 10) {
-            closeNavbar();
+    window.addEventListener("touchmove", (e) => {
+        const touchCurrentY = e.touches[0].clientY;
+
+        if (window.scrollY <= 1 && touchCurrentY > touchStartY && !navbarVisible) {
+            showNavbar();
         }
 
-        lastScroll = currentScroll;
+        touchStartY = touchCurrentY;
     });
 });
 </script>
-
-
 
 
 

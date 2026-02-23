@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         toggleBtn.textContent = savedTheme === "dark" ? "☀️" : "🌙";
         // ustawienie tła przy wczytaniu
         body.style.backgroundImage = savedTheme === "dark"
-            ? 'url("/static/img/background_dark.jpg")'
+            ? 'url("/static/img/background_dark.png")'
             : 'url("/static/img/background.png")';
     }
 
