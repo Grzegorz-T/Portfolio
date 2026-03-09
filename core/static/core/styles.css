@@ -2,10 +2,10 @@
     --text-color: #000000;
     --card-bg: #ffffff;
     --navbar-bg: #769bbd;
-    --bg-image: url("../img/background.png");
+    --bg-image: url("../img/background.jpg");
     --bg-overlay: linear-gradient(
-        rgba(100,100,100,0.5),
-        rgba(100,100,100,0.5)
+        rgba(100,100,100,0.25),
+        rgba(100,100,100,0.25)
     );
 }
 
@@ -13,7 +13,7 @@
     --text-color: #f1f1f1;
     --card-bg: #1e1e1e;
     --navbar-bg: #101010;
-    --bg-image: url("../img/background_dark.png");
+    --bg-image: url("../img/background_dark.jpg");
     --bg-overlay: linear-gradient(
         rgba(0,0,0,0.35),
         rgba(0,0,0,0.35)
@@ -26,7 +26,7 @@ body {
     min-height: 100vh;
     color: var(--text-color);
     background-image: var(--bg-image);
-    background-size: 140%;
+    background-size: 150%;
     background-position: top;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -39,8 +39,10 @@ body::before {
     background: 
         var(--bg-overlay),
         var(--bg-image);
-    background-size: 140%;
+    background-size: 150%;
+    filter: brightness(200%);
     background-position: top;
+    background-attachment: fixed;
     z-index: -1;
 }
 
@@ -295,8 +297,103 @@ line-height: 1.6;
     margin: 20px;
     user-select: none;
     -webkit-user-drag: none;
-
     pointer-events: none; /* 🔥 zapobiega klik/drag obrazka */
+}
+
+/* GRID */
+
+.charts-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:25px;
+margin-top:40px;
+}
+
+/* SLOT */
+
+.chart-slot{
+height:260px;
+border-radius:20px;
+backdrop-filter:blur(6px);
+background:rgba(255,255,255,0.08);
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
+overflow:hidden;
+}
+
+/* PLUS */
+
+.add-chart{
+font-size:60px;
+cursor:pointer;
+opacity:0.6;
+transition:.3s;
+}
+
+.add-chart:hover{
+opacity:1;
+transform:scale(1.1);
+}
+
+/* MODAL */
+
+.chart-modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.7);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+
+.hidden{
+display:none;
+}
+
+/* WYBÓR WYKRESU */
+
+.chart-types{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:20px;
+background:white;
+padding:30px;
+border-radius:15px;
+}
+
+.chart-types div{
+padding:20px;
+cursor:pointer;
+border-radius:10px;
+background:#eee;
+text-align:center;
+}
+
+.chart-types div:hover{
+background:#ddd;
+}
+
+/* FORM */
+
+#chartForm{
+background:white;
+padding:30px;
+border-radius:15px;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.data-row{
+display:flex;
+gap:10px;
+}
+
+.data-row input{
+padding:6px;
 }
 
 .contact-section {

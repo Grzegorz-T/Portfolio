@@ -1,4 +1,9 @@
 {% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_js %}
+<script src="{% static 'core/dashboards.js' %}"></script>
+{% endblock %}
 
 {% block content %}
 <h2 class="mb-4">Statystyki projektów</h2>
@@ -9,6 +14,55 @@
 
 {{ labels|json_script:"chart-labels" }}
 {{ counts|json_script:"chart-data" }}
+
+<div class="divider">
+    <span></span>
+</div>
+
+<!-- Kreator wykresu -->
+<h2 class="mb-4">Statystyki projektów</h2>
+
+<div class="container mt-5">
+    <div id="chartsGrid" class="charts-grid">
+
+        <!-- 6 slotów -->
+        {% for i in "123456" %}
+        <div class="chart-slot" data-slot="{{forloop.counter}}">
+            <div class="add-chart">
+                +
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+
+<!-- WYBÓR TYPU -->
+<div id="chartTypeModal" class="chart-modal hidden">
+    <div class="chart-types">
+        <div data-type="line">📈 Liniowy</div>
+        <div data-type="bar">📊 Słupkowy</div>
+        <div data-type="pie">🥧 Kołowy</div>
+        <div data-type="doughnut">🍩 Donut</div>
+    </div>
+</div>
+
+
+<!-- FORMULARZ -->
+<div id="chartFormModal" class="chart-modal hidden">
+
+    <form id="chartForm">
+        <h4>Dane wykresu</h4>
+
+        <div id="dataInputs"></div>
+
+        <button type="button" id="addRow">+ dodaj wiersz</button>
+
+        <button type="submit">Utwórz wykres</button>
+    </form>
+
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
