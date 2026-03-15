@@ -91,3 +91,30 @@ inputs.innerHTML="";
 document.getElementById("addRow").click();
 
 };
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+document.querySelectorAll(".chart-slot canvas").forEach(canvas=>{
+
+const type = canvas.dataset.type;
+const labels = JSON.parse(canvas.dataset.labels);
+const values = JSON.parse(canvas.dataset.values);
+
+new Chart(canvas,{
+type:type,
+data:{
+labels:labels,
+datasets:[{
+label:"Dane",
+data:values
+}]
+},
+options:{
+responsive:true,
+maintainAspectRatio:false
+}
+});
+
+});
+
+});

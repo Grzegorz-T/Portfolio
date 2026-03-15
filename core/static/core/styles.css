@@ -51,6 +51,19 @@ body::before {
     color: var(--text-color);
 }
 
+.divider {
+    width: 100%;
+    height: 3px;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    background: linear-gradient(
+        120deg,
+        transparent 15%,
+        #505d67 50%,
+        transparent 85%
+    );
+}
+
 .navbar {
     background-color: var(--navbar-bg) !important;
 }
@@ -176,8 +189,26 @@ margin-bottom: 10px;
 
 
 .about-card p {
-color: #555;
 line-height: 1.6;
+}
+
+.skills-section h2 {
+    font-weight: 600;
+}
+
+.skill-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 14px;
+}
+
+.skill-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+.skill-icon {
+    font-size: 2.5rem;
+    color: #4a8cff;
 }
 
 #projectsChart {
@@ -300,27 +331,68 @@ line-height: 1.6;
     pointer-events: none; /* 🔥 zapobiega klik/drag obrazka */
 }
 
+/*-------------------------------------------------------------------------*/
+
+.dashboard-section h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 40px;
+    font-size: 2.2rem;
+    color: #ffffff;
+}
+
+.dashboard-section{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 40px;
+}
+
 /* GRID */
 
 .charts-grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:25px;
+gap:30px;
 margin-top:40px;
 }
-
-/* SLOT */
 
 .chart-slot{
 height:260px;
 border-radius:20px;
+background:rgba(255,255,255,0.1);
 backdrop-filter:blur(6px);
-background:rgba(255,255,255,0.08);
 display:flex;
 align-items:center;
 justify-content:center;
 position:relative;
-overflow:hidden;
+}
+
+.add-chart{
+font-size:60px;
+opacity:.5;
+cursor:pointer;
+}
+
+.add-chart:hover{
+opacity:1;
+}
+
+.chart-slot canvas{
+width:100%!important;
+height:100%!important;
+}
+
+.delete-chart{
+position:absolute;
+top:10px;
+right:10px;
+border:none;
+background:red;
+color:white;
+border-radius:50%;
+width:25px;
+height:25px;
+cursor:pointer;
 }
 
 /* PLUS */

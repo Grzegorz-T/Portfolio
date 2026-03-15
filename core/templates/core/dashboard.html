@@ -6,21 +6,20 @@
 {% endblock %}
 
 {% block content %}
-<h2 class="mb-4">Statystyki projektów</h2>
+<section class="dashboard-section">
+    <h1 class="mb-4">Statystyki moich projektów</h1>
+    <div class="card shadow-sm p-4">
+        <canvas id="projectsChart">
+            {{ labels|json_script:"chart-labels" }}
+            {{ counts|json_script:"chart-data" }}
+        </canvas>
+    </div>
 
-<div class="card shadow-sm p-4">
-    <canvas id="projectsChart"></canvas>
-</div>
-
-{{ labels|json_script:"chart-labels" }}
-{{ counts|json_script:"chart-data" }}
-
-<div class="divider">
-    <span></span>
-</div>
-
+    <div class="divider">
+        <span></span>
+    </div>
 <!-- Kreator wykresu -->
-<h2 class="mb-4">Statystyki projektów</h2>
+<h1 class="mb-4">Własne wykresy</h1>
 
 <div class="container mt-5">
     <div id="chartsGrid" class="charts-grid">
@@ -36,7 +35,7 @@
 
     </div>
 </div>
-
+</section>
 
 <!-- WYBÓR TYPU -->
 <div id="chartTypeModal" class="chart-modal hidden">
